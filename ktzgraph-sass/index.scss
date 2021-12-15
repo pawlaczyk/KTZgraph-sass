@@ -1,0 +1,23 @@
+// kolejnosc importow ma znaczenie klomponenty zalezne od czegosc mają byc nizej
+
+//variables & functions
+@import 'functions';
+@import 'variables';
+
+// base & layout
+@import 'base';
+@import 'breakpoints';
+@import 'grid';
+
+//colors
+@import 'colors';
+
+//component (button, card, navbar)
+@import 'components/card';
+@import 'components/button';
+@import 'components/navbar';
+@import 'components/badge';
+
+//utilites (margin, padding, opacity)
+//m-4 pl-3 o-40
+@import 'utilities';

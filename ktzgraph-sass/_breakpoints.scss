@@ -1,0 +1,66 @@
+//media queries
+$breakpoints: (
+    "xs": 0,
+    "sm": 480px,
+    "md": 720px,
+    "lg": 960px,
+    "xl": 1200px,
+);
+
+@mixin xs {
+    @media (min-width: map-get($breakpoints, "xs")){
+        @content; //jedno property albo więcej np @xs {font-size:10px; background-color:red}
+    }
+}
+
+@mixin sm {
+    @media (min-width: map-get($breakpoints, "sm")){
+        @content; //jedno property albo więcej np @xs {font-size:10px; background-color:red}
+    }
+}
+
+@mixin md {
+    @media (min-width: map-get($breakpoints, "md")){
+        @content; //jedno property albo więcej np @xs {font-size:10px; background-color:red}
+    }
+}
+
+@mixin lg {
+    @media (min-width: map-get($breakpoints, "lg")){
+        @content; //jedno property albo więcej np @xs {font-size:10px; background-color:red}
+    }
+}
+
+@mixin xl {
+    @media (min-width: map-get($breakpoints, "xl")){
+        @content; //jedno property albo więcej np @xs {font-size:10px; background-color:red}
+    }
+}
+
+// more flexibile mixin dla breakpointów
+@mixin breakpoint($bp: 0){ //jakis nietypowy breakpoint (nie wystepujacy w mapie u góry) np dla szerokosci 20px, domyslnie 0
+    @media(min-width: $bp){ // very flexible breakpoint
+        @content;
+    }
+}
+
+.responsive-test {
+    @include xs{
+        color: red;
+    }
+    @include sm {
+        color: blue;
+    }
+    @include md {
+        color: green;
+    }
+    @include lg {
+        color: purple;
+    }
+    @include xl {
+        color: orange;
+    }
+    @include breakpoint(1400px){ // custom breakpoint mixin
+        color: pink;
+    }
+}

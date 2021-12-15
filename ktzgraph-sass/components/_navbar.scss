@@ -1,0 +1,36 @@
+// % robie placeholder zeby do css'a nie generowalo NIEPOTRZEBJ KLASY .flex-layout, .navbar .container, .navbar {}
+%flex-layout{ //class selector
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+//@extend vs @mixin
+// podobnie reuzywalnosc kodu
+//podobnie rozszerza elemnt
+//inaczje - nie podaje tu paramtetrow
+//inaczej kompiluje do css'a .flex-layout, .navbar {} PRZECINEK
+.navbar {
+    @extend %flex-layout; 
+    padding: $base-padding $base-padding *2; //poziomo OX wikeszy padding
+    box-shadow: $base-box-shadow;
+
+    .site-title {
+        font-size: $font-size-lg;
+    }
+
+    //zeby container w srodku nava byl flex
+    .container {
+        @extend %flex-layout;
+    }
+}
+
+//rozszerzenie klasy nav zeby bylo kilka wersji kolorow
+@each $key, $val in $colors {
+    .navbar-#{$key} {
+        @extend .navbar;
+        background-color: $val;
+    }
+}

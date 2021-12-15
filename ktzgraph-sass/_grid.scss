@@ -1,0 +1,108 @@
+@use "sass:math";
+
+$grid-coulmns:12; // dużo systemów siatek 12 kolumnowych
+$grid-gasp: ( //przerwy miedzy elemntami kolumnami
+    "0": 0,
+    "1": 10px,
+    "2": 20px,
+    "3": 30px,
+); // MUSI BYC SREDNIK NA KONCU
+
+//justify content - lista w sassie zamiast map
+$layout-values: flex-start, flex-end, center, space-between, space-around;
+//justify-flex-end wyrownuje do prawej jak ma wolne miejsce
+// justify-center wysrodkowuje elemnty
+
+
+//base-layout
+.container { //bazowy czesto kontekst na środku strony
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; // centrowanie w poziomie
+    padding: 0 20px;
+    box-sizing: border-box; // border wliczony w rodek elemntu a nie standardowo jak w css rozszera wielkosc
+}
+
+.row {// wiersz w nim sa kolumny
+    display: flex;
+    flex-flow: row wrap; // na dol jak sie nie miesci
+}
+
+
+//grip gaps jak doda sie ta klase wierszowi row to wszsytkie lemnty maja padding
+@each $key, $val in $grid-gasp {
+    .gap-#{$key} > * { // gwiazda oznacza dowolny elemnt, czy to div czy to paragraf - kazdy elemnt flexowy ktory ma te klase
+        //dodanie paddingi do elemntu
+        padding: $val;
+    }
+    //usuwanie paddingu po lewej z pierwszego elemntu i prawego paddingu elemntu sotatniego po prawej
+    // przez ujemny margines
+    .gap-#{$key} {
+        margin-left: -$val; //ujemny margin
+        margin-right: -$val; //ujemny margines
+    }
+}
+
+//justify content classes
+//foreach po liscie - tylko jedna zmienna
+@each $val in $layout-values {
+    .justify-#{$val} {
+        justify-content: $val;
+    }
+}
+
+
+//mozna zrefaktorowac powtarzalny kod dla roznych ekranow do jakiego mixina 
+//col classes
+// .col-xs-12 na extra malych ekranach daj tej kolumnie cale 12 ulamkow - caly ekran
+// .col-md-6 to 1/2 ekranu
+@include xs { // brak selektora w tym mixinie
+    //.col-xs-1, /col-xs-2, col-xs-3
+    @for $i from 1 through $grid-coulmns { // <1,12>
+        .col-#{$i}-xs { //.col-12-xs albo .col-6-xs
+            box-sizing: border-box;
+            flex-grow: 0; //nie rosnie
+            width: math.div($i * 100%, $grid-coulmns); //rozmiar w procentach podzielony przez kolumny zeby dostac ulamek ekreanu
+        }
+    } 
+}
+
+@include sm { // brak selektora w tym mixinie
+    @for $i from 1 through $grid-coulmns { // <1,12>
+        .col-#{$i}-sm { //.col-12-xs albo .col-6-xs
+            box-sizing: border-box;
+            flex-grow: 0; //nie rosnie
+            width: math.div($i * 100%, $grid-coulmns); //rozmiar w procentach podzielony przez kolumny zeby dostac ulamek ekreanu
+        }
+    } 
+}
+
+@include md { // brak selektora w tym mixinie
+    @for $i from 1 through $grid-coulmns { // <1,12>
+        .col-#{$i}-md { //.col-12-xs albo .col-6-xs
+            box-sizing: border-box;
+            flex-grow: 0; //nie rosnie
+            width: math.div($i * 100%, $grid-coulmns); //rozmiar w procentach podzielony przez kolumny zeby dostac ulamek ekreanu
+        }
+    } 
+}
+
+@include lg { // brak selektora w tym mixinie
+    @for $i from 1 through $grid-coulmns { // <1,12>
+        .col-#{$i}-lg { //.col-12-xs albo .col-6-xs
+            box-sizing: border-box;
+            flex-grow: 0; //nie rosnie
+            width: math.div($i * 100%, $grid-coulmns); //rozmiar w procentach podzielony przez kolumny zeby dostac ulamek ekreanu
+        }
+    } 
+}
+
+@include xl { // brak selektora w tym mixinie
+    @for $i from 1 through $grid-coulmns { // <1,12>
+        .col-#{$i}-xl { //.col-12-xs albo .col-6-xs
+            box-sizing: border-box;
+            flex-grow: 0; //nie rosnie
+            width: math.div($i * 100%, $grid-coulmns); //rozmiar w procentach podzielony przez kolumny zeby dostac ulamek ekreanu
+        }
+    } 
+}
